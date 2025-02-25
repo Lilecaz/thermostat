@@ -5,7 +5,7 @@ import serial
 data = {
     "temperature": 0.0,
     "humidite": 0.0,
-    "temperaturecible":0.0
+    "targetTemp":0.0
 }
 
 def read_uart_data():
@@ -27,8 +27,8 @@ def read_uart_data():
                     try:
                         data["temperature"] = float(valeurs[0])
                         data["humidite"] = float(valeurs[1])
-                        data['temperaturecible'] = float(valeurs[2])
-                        print(f"Température: {data['temperature']}°C, Humidité: {data['humidite']}%, temp_Cible :{data['temperaturecible']}°C")
+                        data["targetTemp"] = float(valeurs[2])
+                        print(f"Température: {data['temperature']}°C, Humidité: {data['humidite']}%, Target: {data['targetTemp']}")
                     except ValueError:
                         print(f"Erreur de conversion des valeurs: {ligne}")
             

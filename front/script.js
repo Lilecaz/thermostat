@@ -27,11 +27,8 @@ function setTemperature() {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                alert('Température cible définie !');
-            } else {
-                alert('Erreur lors de la définition de la température cible.');
-            }
+            alert('Température cible définie !');
+          
         });
 }
 

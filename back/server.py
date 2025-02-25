@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import threading
 import receive_uart as receive
+import send_uart as send
 
 app = Flask(__name__)
 CORS(app)  # Permet les requêtes depuis le frontend
@@ -26,7 +27,7 @@ def update_data():
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-
+    print(data)
     return jsonify(data)
 
 
@@ -36,6 +37,7 @@ def set_temperature():
     global data
     req_data = request.get_json()
     data['target_temperature'] = float(req_data.get('temperature', data['target_temperature']))
+    send.send_target_temperature('/dev/ttyACM0', 115200, data['target_temperature'])
     return jsonify({"message": "Température cible mise à jour."})
 
 @app.route('/api/update_sensor', methods=['POST'])
@@ -53,4 +55,4 @@ threading.Thread(target=receive.read_uart_data, daemon=True).start()
 threading.Thread(target=update_data, daemon=True).start()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='192.168.26.169', port=5000, debug=True)
