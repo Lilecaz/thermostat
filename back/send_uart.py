@@ -11,7 +11,7 @@ def send_target_temperature(port, baudrate, target_temperature):
         
         # Fermer le port série
         ser.close()
-        print(f"Température cible {target_temperature} envoyée avec succès.")
+        print(f"Température cible {target_temperature} envoyée avec succès.", port, baudrate, target_temperature)
     except serial.SerialException as e:
         print(f"Erreur de communication avec le port série: {e}")
     except Exception as e:

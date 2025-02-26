@@ -28,9 +28,8 @@ def update_data():
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    print(data)
+    # print(data)
     return jsonify(data)
-
 
 @app.route('/api/set_temp', methods=['POST'])
 def set_temperature():
