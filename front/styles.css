@@ -1,34 +1,225 @@
-body {
+* {
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, #f3f4f6, #e2e8f0);
+    transition: background 0.5s ease-in-out;
+}
+
+/* Section de l'en-tête avec le titre "Thermostat" et la localisation */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #000000;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Wrapper pour contenir toutes les sections */
+.wrapper {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-top: 50px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Box pour la température et l'humidité */
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    position: relative;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #374151;
+}
+
+p {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.unit {
+    font-size: 1.5em;
+    color: #666;
+}
+
+/* Température */
+.temp-icon {
+    font-size: 4em;
+    margin-top: 10px;
+}
+
+/* Humidité */
+.circle {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: #ddd;
+    cx: 50;
+    cy: 50;
+    r: 40;
+}
+
+#humidityCircle {
+    stroke: #3b82f6;
+    stroke-dasharray: 251.2;
+    stroke-dashoffset: 251.2;
+    transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+/* Section des contrôles */
+.controls {
+    text-align: center;
+    padding: 30px;
+    width: 350px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.controls h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 12px;
+    width: 90%;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    text-align: center;
+}
+
+button {
+    background: #3b82f6;
+    color: white;
+    padding: 14px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+/* Pop-up */
+.popup {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+
+.temperature-value{
+    display: flex;
+  justify-content: center;
+}
+.controls {
     text-align: center;
     padding: 20px;
-    color: white;
-}
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: #ffffff;
     border-radius: 15px;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    margin-top: 30px;
 }
-.status {
-    font-size: 24px;
+
+.controls label {
+    font-size: 1.2em;
     font-weight: bold;
-    margin: 15px 0;
+    margin-bottom: 10px;
+    color: #333;
+    display: block;
 }
-button {
+
+.controls input {
     padding: 12px;
-    margin-top: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    background: white;
-    color: #ff758c;
-    transition: 0.3s;
+    font-size: 1.2em;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    text-align: center;
+    transition: all 0.3s ease;
 }
-button:hover {
-    background: #ffebf0;
+
+.controls input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+.controls button {
+    background: #3b82f6;
+    color: white;
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.controls button:hover {
+    background: #2563eb;
+}
+
+.controls button:active {
+    background: #1d4ed8;
 }

@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <script src="script.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thermostat Connecté</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Thermostat Connecté</h1>
-        <p class="status">Température actuelle : <span id="temperature">--</span>°C</p>
-        <p class="status">Humidité actuelle : <span id="humidite">--</span>%</p>
-        <p class="status">État du relais : <span id="relais">--</span></p>
-        
-        <label for="targetTemp">Définir température cible :</label>
-        <input type="number" id="targetTemp" placeholder="Entrer la température">
-        <button onclick="setTemperature()">Définir</button>
+    <!-- En-tête avec le titre "Thermostat" et la localisation -->
+    <header>
+        <h1>Thermostat</h1>
+        <p id="location">📍 Localisation : Chargement...</p>
+    </header>
+
+    <!-- Pop-up de notification -->
+    <div id="popup" class="popup">Message de notification</div>
+
+    <!-- Section principale -->
+    <div class="wrapper">
+        <!-- Section Température -->
+        <div class="box temperature">
+            <h2>🌡️ Température</h2>
+            <div class="temperature-value">
+                <div id="tempIcon" class="temp-icon">❄️</div>
+
+                <p id="temperature">--</p>
+                <p class="unit">°C</p>
+            </div>
+        </div>
+
+        <!-- Section centrale pour les contrôles -->
+        <div class="controls">
+            <label for="targetTemp">Définir la température :</label>
+            <input type="number" id="targetTemp" placeholder="Entrer la température">
+            <button onclick="setTemperature()">Définir</button>
+        </div>
+
+
+        <!-- Section Humidité -->
+        <div class="box humidity">
+            <h2>💧 Humidité</h2>
+
+            <div class="circle">
+                <svg>
+                    <circle cx="50" cy="50" r="40"></circle>
+                    <circle id="humidityCircle" cx="50" cy="50" r="40"></circle>
+                </svg>
+                <p id="humidite"></p>
+                <p class="unit">%</p>
+            </div>
+        </div>
     </div>
 
+    <!-- Pop-up -->
+    <div id="popup" class="popup">Message de notification</div>
 </body>
 </html>

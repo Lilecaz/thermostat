@@ -15,7 +15,7 @@ data = {
     "temperature": 0.0,
     "humidite": 0.0,
     "relais": False,
-    "target_temperature": 25
+    "target_temperature": 0
 }
 
 def update_data():
@@ -24,12 +24,12 @@ def update_data():
     while True:
         data["temperature"] = receive.data["temperature"]
         data["humidite"] = receive.data["humidite"]
+        data['target_temperature'] = receive.data["targetTemp"]
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    print(data)
+    # print(data)
     return jsonify(data)
-
 
 @app.route('/api/set_temp', methods=['POST'])
 def set_temperature():
@@ -47,6 +47,7 @@ def update_sensor():
     req_data = request.get_json()
     data['temperature'] = float(req_data.get('temperature', data['temperature']))
     data['humidite'] = float(req_data.get('humidite', data['humidite']))
+    data['target_temperature'] = float(req_data.get('temperature', data['target_temperature']))
     data['relais'] = bool(req_data.get('relais', data['relais']))
     return jsonify({"message": "Données mises à jour."})
 
